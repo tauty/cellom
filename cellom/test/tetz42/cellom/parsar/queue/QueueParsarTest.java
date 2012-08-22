@@ -62,7 +62,7 @@ public class QueueParsarTest {
 
 	@Test
 	public void parseAll() {
-		String s = mkStringByCRLF(StrAndInt.TEST_STR,
+		String s = mkStringBy("\r\n", StrAndInt.TEST_STR,
 				StrAndInt.TEST_STR, "\r\n", StrAndInt.TEST_STR, "\r\n", "\r\n");
 		List<StrAndInt> list = QueueParsar.parseAll(StrAndInt.class,
 				new ByteArrayInputStream(s.getBytes()));
