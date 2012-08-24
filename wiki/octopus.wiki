@@ -1,4 +1,3 @@
-
 = Introduction =
 
 Cellomは、Java向けの集計表作成ライブラリです。
@@ -320,40 +319,49 @@ class Section {
 	public void normal() {
 
 		TableManager<Table> tm = TableManager.create(Table.class);
+		rowSetting(tm, 20, 30, 40, 50);
 
 		for (Employee e : employees) {
 
+			// 社員の世代取得
 			String generation = getGeneration(e.age);
 
 			// 世代別行への反映
-			Table table = tm.row(generation).get();
-			table.generation = generation;
-			updateEmployee(table, e);
+			updateEmployee(tm.row(generation).get(), e);
 
-			// 総計行の生成
-			table = tm.footer().get();
-			table.generation = "総計";
-			updateEmployee(table, e);
+			// 総計行への反映
+			updateEmployee(tm.footer().get(), e);
 		}
 
 		assertEqualsWithFile(new HtmlGenerator().generate(tm), getClass(),
 				"normal");
 	}
 
+	// 行初期設定
+	private void rowSetting(TableManager<Table> tm, int... ages) {
+
+		// 各世代行の生成
+		for (int age : ages) {
+			String generation = getGeneration(age);
+			tm.row(generation).get().generation = generation;
+		}
+
+		// 総計行の生成
+		tm.footer("総計").get().generation = "総計";
+	}
+
+	// 年齢から世代を求める
 	private String getGeneration(int age) {
-		if (age < 20)
-			return "10代";
 		if (age < 30)
 			return "20代";
 		if (age < 40)
 			return "30代";
 		if (age < 50)
 			return "40代";
-		if (age < 60)
-			return "50代";
-		return "定年後";
+		return "50代";
 	}
 
+	// 社員情報のTableオブジェクトへの反映
 	private void updateEmployee(Table table, Employee e) {
 		Section section = table.sectionMap.get(e.section);
 
@@ -415,7 +423,7 @@ class Section {
 			<td style="BODY">11</td>
 		</tr>
 				:
-			　(中略)
+			　　(中略)
 				:
 		<tr>
 			<td style="BODY">総計</td>
@@ -451,8 +459,12 @@ Cellomではクエリという機能が用意されており、こちらを使�
 
 		for (Employee e : employees) {
 			String generation = getGeneration(e.age);
+
+			// 更新対象のセル取得用クエリ
 			String query = generation + ",総計|@sum,sectionMap|" + e.section
 					+ "|@sum,titleMap|" + e.title;
+			
+			// クエリを発行し、更新対象を一気に+1
 			for (Cell<Integer> cell : tm.getByQuery(Integer.class, query)) {
 				cell.add(1);
 			}
@@ -461,17 +473,22 @@ Cellomではクエリという機能が用意されており、こちらを使�
 		assertEqualsWithFile(new HtmlGenerator().generate(tm), getClass(),
 				"query");
 	}
-
-	private void rowSetting(TableManager<Table> tm, int... ages) {
-		for (int age : ages) {
-			String generation = getGeneration(age);
-			tm.row(generation).get().generation = generation;
-		}
-		tm.footer("総計").get().generation = "総計";
-	}
 }}}
 
 出力される結果は上記と全く同じなので、割愛します。
 
-クエリとはTableManagerに登録されたものの内、
+クエリとは、TableManagerから条件に合致するものをCellオブジェクトとして一気に取得するための仕組みで、複数個所に同一の数を足す必要のある集計表では便利な仕組みです。<br>
+Cellオブジェクトとは、集計表を作成したときのフィールド一つ一つと対応するオブジェクトで、値の操作の他にも、スタイルの設定、幅の設定、値の変換設定などを行うことができます。
+Cellomのクエリは、下記のような構成になっています。<br>
+　　[行指定箇所]|[フィールド or CelloMapのkey名指定箇所]|[フィールド or CelloMapのkey名指定箇所]|...<br>
+先頭にくるのは行指定箇所で、ここでは行につけた名前(今回のケースでは「20代」・「30代」・「総計」等)を使ってアクセスしています。行指定には他にも全行指定「*」やカレント行指定の「.」などがあります。「,」で区切ることで、複数行を指定することが可能です。<br>
+行指定の後には、クラスのフィールド or CelloMapに登録されたkey名を指定します。クラス・CelloMapの下に更なるクラス・CelloMapが登録されている場合には「|」でつないで何階層でも辿って特定のフィールドを指定することができます。行指定と同様に、「,」で区切ることで複数指定することもできます。なおCellオブジェクトとして返却されるのは一番最後に指定されたフィールドと、「@」が先頭に付与されたフィールドです。<br>
+例として、上記のquery生成でもしEmployeeが30代で東京支社のエンジニアだった場合に生成されるクエリーは、<br><br>
+　　30代,総計|@sum,sectionMap|東京支社|@sum,titleMap|エンジニア<br>
+となります。これにより、Table#sumフィールド、Table#sectionMap#東京支社#sum, Table#sectionMap#東京支社#titleMap#エンジニアの3フィールドが、「30代」「総計」の2行分取得されるので、合計6フィールド分のCellオブジェクトが取得されます。
+
+== エクセル出力 ==
+
+今度は作成した集計表をエクセルとして出力してみましょう。
+
 
