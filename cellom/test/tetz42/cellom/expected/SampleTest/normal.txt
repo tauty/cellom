@@ -1,0 +1,107 @@
+<table border="1">
+	<thead>
+		<tr>
+			<th rowspan="2" style="HEADER">世代</th>
+			<th colspan="4" style="HEADER">名古屋本社</th>
+			<th colspan="4" style="HEADER">東京支社</th>
+			<th colspan="4" style="HEADER">大阪支社</th>
+			<th rowspan="2" style="HEADER">合計</th>
+		</tr>
+		<tr>
+			<th style="HEADER">エンジニア</th>
+			<th style="HEADER">事務</th>
+			<th style="HEADER">営業</th>
+			<th style="HEADER">小計</th>
+			<th style="HEADER">エンジニア</th>
+			<th style="HEADER">事務</th>
+			<th style="HEADER">営業</th>
+			<th style="HEADER">小計</th>
+			<th style="HEADER">エンジニア</th>
+			<th style="HEADER">事務</th>
+			<th style="HEADER">営業</th>
+			<th style="HEADER">小計</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="BODY">20代</td>
+			<td style="BODY">3</td>
+			<td style="BODY">0</td>
+			<td style="BODY">0</td>
+			<td style="BODY">3</td>
+			<td style="BODY">4</td>
+			<td style="BODY">2</td>
+			<td style="BODY">0</td>
+			<td style="BODY">6</td>
+			<td style="BODY">1</td>
+			<td style="BODY">1</td>
+			<td style="BODY">0</td>
+			<td style="BODY">2</td>
+			<td style="BODY">11</td>
+		</tr>
+		<tr>
+			<td style="BODY">30代</td>
+			<td style="BODY">2</td>
+			<td style="BODY">1</td>
+			<td style="BODY">0</td>
+			<td style="BODY">3</td>
+			<td style="BODY">3</td>
+			<td style="BODY">0</td>
+			<td style="BODY">1</td>
+			<td style="BODY">4</td>
+			<td style="BODY">2</td>
+			<td style="BODY">0</td>
+			<td style="BODY">1</td>
+			<td style="BODY">3</td>
+			<td style="BODY">10</td>
+		</tr>
+		<tr>
+			<td style="BODY">40代</td>
+			<td style="BODY">1</td>
+			<td style="BODY">0</td>
+			<td style="BODY">0</td>
+			<td style="BODY">1</td>
+			<td style="BODY">1</td>
+			<td style="BODY">0</td>
+			<td style="BODY">0</td>
+			<td style="BODY">1</td>
+			<td style="BODY">0</td>
+			<td style="BODY">0</td>
+			<td style="BODY">0</td>
+			<td style="BODY">0</td>
+			<td style="BODY">2</td>
+		</tr>
+		<tr>
+			<td style="BODY">50代</td>
+			<td style="BODY">2</td>
+			<td style="BODY">0</td>
+			<td style="BODY">1</td>
+			<td style="BODY">3</td>
+			<td style="BODY">0</td>
+			<td style="BODY">0</td>
+			<td style="BODY">0</td>
+			<td style="BODY">0</td>
+			<td style="BODY">0</td>
+			<td style="BODY">0</td>
+			<td style="BODY">0</td>
+			<td style="BODY">0</td>
+			<td style="BODY">3</td>
+		</tr>
+		<tr>
+			<td style="BODY">総計</td>
+			<td style="BODY">8</td>
+			<td style="BODY">1</td>
+			<td style="BODY">1</td>
+			<td style="BODY">10</td>
+			<td style="BODY">8</td>
+			<td style="BODY">2</td>
+			<td style="BODY">1</td>
+			<td style="BODY">11</td>
+			<td style="BODY">3</td>
+			<td style="BODY">1</td>
+			<td style="BODY">1</td>
+			<td style="BODY">5</td>
+			<td style="BODY">26</td>
+		</tr>
+	</tbody>
+</table>

@@ -11,12 +11,12 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import tetz42.cellom.common.HereDoc;
 import tetz42.cellom.parsar.csv.CsvParsar.Result;
 import tetz42.cellom.parsar.csv.entity.InitialTest;
 import tetz42.cellom.parsar.csv.entity.SameOrderTest;
 import tetz42.cellom.parsar.csv.entity.ValidationTest;
 import tetz42.cellom.parsar.csv.entity.ValidationTest2;
-import tetz42.clione.common.HereDoc;
 
 public class CsvParsarTest {
 

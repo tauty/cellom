@@ -1,6 +1,6 @@
 package tetz42.cellom.parsar.queue;
 
-import static tetz42.clione.common.ReflectionUtil.*;
+import static tetz42.cellom.common.ReflectionUtil.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,8 +10,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import tetz42.cellom.common.Using;
 import tetz42.cellom.parsar.queue.annotation.QueueCell;
-import tetz42.clione.common.Using;
 
 public class QueueParsar {
 
@@ -123,7 +123,6 @@ public class QueueParsar {
 			} else {
 				res = this.previous = this.nextTask(size);
 			}
-			System.out.println("next#res = " + res);
 			return res;
 		}
 

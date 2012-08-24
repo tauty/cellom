@@ -60,6 +60,6 @@ public class HtmlGenerator {
 		sb.append(cell.getValue());
 
 		// th/td tag end
-		sb.append("</").append(thtd).append("td>").append(CRLF);
+		sb.append("</").append(thtd).append(">").append(CRLF);
 	}
 }

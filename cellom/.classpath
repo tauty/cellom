@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="lib/servlet-api-2.4.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="lib/auty4junit-0.4.6.jar"/>
+	<classpathentry kind="lib" path="lib/clione-sql-0.5.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

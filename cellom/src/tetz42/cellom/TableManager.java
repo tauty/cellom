@@ -23,14 +23,14 @@ public class TableManager<T> implements ITableManager {
 	private final Context<T> context;
 	private final RowHolder<T> rowHolder;
 	private final RowHolder<T> tmpHolder;
-	private final RowHolder<T> hooterHolder;
+	private final RowHolder<T> footerHolder;
 
 	private TableManager(Class<T> clazz) {
 		this.header = new HeaderManager<T>(clazz);
 		this.context = header.getContext();
 		this.rowHolder = new RowHolder<T>(clazz, context, true);
 		this.tmpHolder = new RowHolder<T>(clazz, context);
-		this.hooterHolder = new RowHolder<T>(clazz, context);
+		this.footerHolder = new RowHolder<T>(clazz, context);
 	}
 
 	public RowHolder<T> body() {
@@ -41,8 +41,17 @@ public class TableManager<T> implements ITableManager {
 		return this.tmpHolder;
 	}
 
+	public RowHolder<T> footers() {
+		return this.footerHolder;
+	}
+
+	/**
+	 * 綴りの間違い
+	 * @deprecated
+	 * @return
+	 */
 	public RowHolder<T> hooters() {
-		return this.hooterHolder;
+		return this.footerHolder;
 	}
 
 	public Row<T> newRow() {
@@ -77,12 +86,30 @@ public class TableManager<T> implements ITableManager {
 		return tmps().row(key);
 	}
 
-	public Row<T> hooter() {
-		return hooters().row();
+	public Row<T> footer() {
+		return footers().row();
 	}
 
+	public Row<T> footer(String key) {
+		return footers().row(key);
+	}
+
+	/**
+	 * 綴りの間違い
+	 * @deprecated
+	 * @return
+	 */
+	public Row<T> hooter() {
+		return footers().row();
+	}
+
+	/**
+	 * 綴りの間違い
+	 * @deprecated
+	 * @return
+	 */
 	public Row<T> hooter(String key) {
-		return hooters().row(key);
+		return footers().row(key);
 	}
 
 	public void setCurrentRowAs(String key) {
@@ -124,7 +151,7 @@ public class TableManager<T> implements ITableManager {
 	public <E> List<Cell<E>> getByQuery(Query query) {
 		List<Cell<E>> list = rowHolder.getByQuery(query);
 		List<Cell<E>> tmpList = tmpHolder.getByQuery(query);
-		List<Cell<E>> tailList = hooterHolder.getByQuery(query);
+		List<Cell<E>> tailList = footerHolder.getByQuery(query);
 		list.addAll(tmpList);
 		list.addAll(tailList);
 		return list;
@@ -140,7 +167,7 @@ public class TableManager<T> implements ITableManager {
 		List<IRow> resultRows = new ArrayList<IRow>();
 		addToRows(resultRows, rowHolder.getRowList());
 		addToRows(resultRows, tmpHolder.getRowList());
-		addToRows(resultRows, hooterHolder.getRowList());
+		addToRows(resultRows, footerHolder.getRowList());
 		return resultRows;
 	}
 
@@ -214,7 +241,7 @@ public class TableManager<T> implements ITableManager {
 
 					@SuppressWarnings("unchecked")
 					Iterator<RowHolder<T>> holdersIte = Arrays.asList(rowHolder,
-							tmpHolder, hooterHolder).iterator();
+							tmpHolder, footerHolder).iterator();
 					Iterator<Row<T>> rowIte;
 
 					private Iterator<Row<T>> rowIterator() {

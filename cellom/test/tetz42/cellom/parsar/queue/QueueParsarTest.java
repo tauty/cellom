@@ -1,7 +1,7 @@
 package tetz42.cellom.parsar.queue;
 
 import static org.junit.Assert.*;
-import static tetz42.clione.common.Util.*;
+import static tetz42.cellom.common.Util.*;
 import static tetz42.test.Auty.*;
 
 import java.io.ByteArrayInputStream;

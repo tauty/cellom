@@ -7,7 +7,7 @@ import java.util.Map;
 
 import tetz42.cellom.body.Cell;
 import tetz42.cellom.body.Row;
-import tetz42.clione.common.exception.InvalidParameterException;
+import tetz42.cellom.common.exception.InvalidParameterException;
 
 public class RowHolder<T> {
 
