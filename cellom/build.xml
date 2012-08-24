@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ======================================================================
+     2010/11/09 9:05:24
+
+     project
+     description
+
+     tetz
+     ====================================================================== -->
+<project name="project" default="mkjar">
+	<description>
+            description
+    </description>
+
+	<property name="basename" value="cellom" />
+	<property name="version" value="0.1.0" />
+	<property name="src" location="./src" />
+	<property name="classes" location="./classes" />
+	<property name="lib" location="./lib" />
+
+	<target name="mkjar">
+		<mkdir dir="${classes}" />
+		<antcall target="jar" />
+		<delete dir="${classes}" />
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar basedir="${classes}" jarfile="${basename}-${version}.jar">
+			<fileset dir="${src}" includes="**/*.txt" />
+		</jar>
+	</target>
+
+	<target name="compile">
+		<javac srcdir="${src}" destdir="${classes}" debug="true" debuglevel="lines,vars,source">
+			<compilerarg value="-Xlint:unchecked" />
+			<classpath>
+				<fileset dir="${lib}">
+					<include name="*.jar" />
+				</fileset>
+			</classpath>
+		</javac>
+	</target>
+
+</project>

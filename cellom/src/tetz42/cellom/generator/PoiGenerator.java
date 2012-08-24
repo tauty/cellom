@@ -23,7 +23,6 @@ import org.apache.poi.ss.usermodel.PrintSetup;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellRangeAddress;
 
-import tetz42.cellom.CelloUtil;
 import tetz42.cellom.ICell;
 import tetz42.cellom.IRow;
 import tetz42.cellom.ITableManager;
@@ -71,11 +70,11 @@ public class PoiGenerator {
 		setupPrint();
 
 		// file name
-		HSSFHeader head = sheet.getHeader();
+		HSSFHeader head = this.sheet.getHeader();
 		head.setRight(HSSFHeader.file());
 
 		// page no
-		HSSFFooter footer = sheet.getFooter();
+		HSSFFooter footer = this.sheet.getFooter();
 		footer.setCenter(HSSFFooter.page() + " / " + HSSFFooter.numPages());
 	}
 
@@ -87,7 +86,7 @@ public class PoiGenerator {
 	}
 
 	private static final Pattern ptn = Pattern
-			.compile("(BOLD_)?NOLINE_([TBLR]+)");
+			.compile("NOLINE_([TBLR]+)");
 
 	public PoiGenerator generate(ITableManager tm) {
 		for (Iterable<ICell> row : tm.header().each()) {
@@ -109,16 +108,17 @@ public class PoiGenerator {
 				HSSFCellStyle style = styleMap.get(cell.getStyle());
 				if (style == null) {
 					// style generate and cache
-					if (cell.getStyle().indexOf("_RIGHT") != -1) {
+					if (cell.getStyle().indexOf("RIGHT") != -1) {
 						style = createBodyRight();
 					} else {
 						style = createBodyLeft();
 					}
+					if (cell.getStyle().indexOf("BOLD") != -1) {
+						style.setFont(boldFont(10));
+					}
 					Matcher m = ptn.matcher(cell.getStyle());
-					if (m.matches()) {
-						if (!CelloUtil.isEmpty(m.group(1)))
-							style.setFont(boldFont(10));
-						String tblf = m.group(2);
+					if (m.find()) {
+						String tblf = m.group(1);
 						if (tblf.contains("T"))
 							style.setBorderTop(HSSFCellStyle.BORDER_NONE);
 						if (tblf.contains("B"))
