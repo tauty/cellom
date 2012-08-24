@@ -1,0 +1,51 @@
+<table border="1">
+	<thead>
+		<tr>
+			<th rowspan="2" style="HEADER">Foo Int.</th>
+			<th rowspan="2" style="HEADER">Foo String.</th>
+			<th colspan="2" style="HEADER">1st</th>
+			<th colspan="2" style="HEADER">2nd</th>
+			<th colspan="2" style="HEADER">3rd</th>
+		</tr>
+		<tr>
+			<th style="HEADER">Bar Int.</th>
+			<th style="HEADER">Bar String.</th>
+			<th style="HEADER">Bar Int.</th>
+			<th style="HEADER">Bar String.</th>
+			<th style="HEADER">Bar Int.</th>
+			<th style="HEADER">Bar String.</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="BODY">1</td>
+			<td style="BODY">one</td>
+			<td style="BODY">1</td>
+			<td style="BODY">one</td>
+			<td style="BODY">2</td>
+			<td style="BODY">two</td>
+			<td style="BODY">3</td>
+			<td style="BODY">three</td>
+		</tr>
+		<tr>
+			<td style="BODY">10</td>
+			<td style="BODY">ten</td>
+			<td style="BODY">10</td>
+			<td style="BODY">ten</td>
+			<td style="BODY">20</td>
+			<td style="BODY">twenty</td>
+			<td style="BODY">30</td>
+			<td style="BODY">thirty</td>
+		</tr>
+		<tr>
+			<td style="BODY">100</td>
+			<td style="BODY">hundred</td>
+			<td style="BODY">100</td>
+			<td style="BODY">hundred</td>
+			<td style="BODY">200</td>
+			<td style="BODY">two-hundred</td>
+			<td style="BODY">300</td>
+			<td style="BODY">three-hundred</td>
+		</tr>
+	</tbody>
+</table>
