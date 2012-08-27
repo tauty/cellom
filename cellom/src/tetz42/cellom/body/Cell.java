@@ -4,6 +4,7 @@ import static tetz42.cellom.CelloUtil.*;
 
 import java.lang.reflect.Field;
 
+import tetz42.cellom.Context;
 import tetz42.cellom.ICell;
 import tetz42.cellom.annotation.Body;
 import tetz42.cellom.annotation.EachBody;
@@ -16,10 +17,12 @@ public class Cell<T> implements ICell {
 	private boolean isConverted;
 	private String convertSchema;
 	private boolean isWindowFrozen = false;
+	private final Context<?> context;
 
-	Cell(Object receiver, Field field) {
+	Cell(Object receiver, Field field, Context<?> context) {
 		this.receiver = receiver;
 		this.field = field;
+		this.context = context;
 		Body cellDef = field.getAnnotation(Body.class);
 		if (cellDef != null) {
 			this.style = cellDef.style();
@@ -30,9 +33,10 @@ public class Cell<T> implements ICell {
 		}
 	}
 
-	Cell(CelloMap<T> cumap, EachBody cellDef) {
+	Cell(CelloMap<T> cumap, EachBody cellDef, Context<?> context) {
 		this.receiver = cumap;
 		this.field = null;
+		this.context = context;
 		if (cellDef != null) {
 			this.style = cellDef.style();
 			this.isConverted = cellDef.convert();
@@ -86,12 +90,19 @@ public class Cell<T> implements ICell {
 
 	@Override
 	public Object getValue() {
-		return get();
+		Object value = get();
+		if (this.isConverted()) {
+			Object o = this.context.getConversion(this.getConvertSchema(),
+					String.valueOf(value));
+			if (o != null)
+				value = o;
+		}
+		return value;
 	}
 
 	@Override
 	public String getString() {
-		return String.valueOf(get());
+		return String.valueOf(getValue());
 	}
 
 	@Override
