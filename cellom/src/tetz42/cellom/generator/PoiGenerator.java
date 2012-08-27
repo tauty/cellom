@@ -43,6 +43,7 @@ public class PoiGenerator {
 
 	private final HSSFCellStyle headerStyle;
 	private final HSSFCellStyle defaultStyle;
+	private final HSSFCellStyle textStyle;
 
 	private int x;
 	private int y;
@@ -66,6 +67,7 @@ public class PoiGenerator {
 
 		headerStyle = createHeaderStyle();
 		defaultStyle = createBodyLeft();
+		textStyle = createTextStyle();
 
 		setupPrint();
 
@@ -169,6 +171,10 @@ public class PoiGenerator {
 
 	public PoiGenerator writeData(Object value) {
 		return write(value, defaultStyle);
+	}
+
+	public PoiGenerator writeText(String value) {
+		return write(value, textStyle);
 	}
 
 	public PoiGenerator write(Object value, HSSFCellStyle style) {
@@ -309,6 +315,12 @@ public class PoiGenerator {
 		style.setLeftBorderColor(IndexedColors.BLACK.getIndex());
 		style.setBorderRight(CellStyle.BORDER_THIN);
 		style.setRightBorderColor(IndexedColors.BLACK.getIndex());
+		return style;
+	}
+
+	private HSSFCellStyle createTextStyle() {
+		HSSFCellStyle style = book.createCellStyle();
+		style.setFont(boldFont(10));
 		return style;
 	}
 

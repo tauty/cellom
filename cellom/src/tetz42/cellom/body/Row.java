@@ -52,7 +52,7 @@ public class Row<T> implements IRow {
 
 		// generate cell
 		List<Cell<Object>> list = getListOnMap(cellMap);
-		Cell<Object> cell = new Cell<Object>(receiver, field);
+		Cell<Object> cell = new Cell<Object>(receiver, field, context);
 		list.add(cell);
 
 		Object value = cell.get();
@@ -83,7 +83,7 @@ public class Row<T> implements IRow {
 		// generate cell
 		List<Cell<Object>> list = getListOnMap(cellMap);
 		Cell<Object> cell = new CellForMap<Object>((CelloMap<Object>) cumap,
-				key);
+				key, context);
 		list.add(cell);
 
 		Object value = cell.get();
